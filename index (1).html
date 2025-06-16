@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>健康資訊與自我診斷平台 | 健康數位服務研究</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  <style>
+    /* 所有 CSS 維持原樣，只加入更完整的響應式調整 */
+
+    @media (max-width: 576px) {
+      header {
+        font-size: 1.3rem;
+        padding: 1.2rem 0 .8rem;
+      }
+      .main-form {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn-search {
+        width: 100%;
+      }
+      .card-article .card-body {
+        padding: .8rem .9rem .8rem;
+      }
+      .footer {
+        font-size: .85rem;
+        padding: .8rem 0 .5rem;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .container-fluid {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    }
+    :root {
+      --primary:       #1876d1;
+      --primary-light: #eaf3fc;
+      --primary-dark:  #105299;
+      --accent:        #45b6fe;
+      --bg-main:       #f8fafc;
+      --bg-secondary:  #eef2f7;
+      --text-dark:     #23334e;
+      --card-radius:   20px;
+      --shadow:        0 4px 24px 0 rgba(60, 89, 120, 0.10);
+      --transition:    0.18s cubic-bezier(.4,0,.2,1);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary:       #3aa5fa;
+        --primary-light: #253a54;
+        --primary-dark:  #105299;
+        --accent:        #59c6fd;
+        --bg-main:       #171f29;
+        --bg-secondary:  #232f44;
+        --text-dark:     #d8e4f5;
+      }
+      body, .card, .sidebar, .main, .footer {
+        color-scheme: dark;
+      }
+    }
+    body {
+      background: var(--bg-main);
+      color: var(--text-dark);
+      font-family: 'Noto Sans TC', '微軟正黑體', Arial, sans-serif;
+      letter-spacing: .01em;
+      min-height: 100vh;
+    }
+    header {
+      padding: 2.2rem 0 1rem;
+      text-align: center;
+      color: var(--primary-dark);
+      font-weight: 800;
+      letter-spacing: .08em;
+      font-size: 2.35rem;
+    }
+    .section-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1.1rem;
+      font-size: 1.25rem;
+      letter-spacing: .05em;
+    }
+    /* Sidebar style */
+    .sidebar {
+      background: var(--card-bg, var(--bg-secondary));
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem 1rem;
+      margin-bottom: 2rem;
+      min-height: 540px;
+      transition: background var(--transition);
+    }
+    .sidebar .list-group {
+      gap: 1rem;
+    }
+    .sidebar .icon-btn {
+      width: 72px;
+      height: 72px;
+      font-size: 2rem;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--primary);
+      border: 2.5px solid var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px 0 #b8d7f833;
+      margin: 0 auto .5rem;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .sidebar .icon-btn:hover, .sidebar .icon-btn:focus {
+      background: var(--primary-light);
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 8px 24px 0 #4ca1e866;
+      color: var(--primary-dark);
+    }
+    .btn-label {
+      display: block;
+      text-align: center;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: .3rem;
+      letter-spacing: .02em;
+    }
+    .collapse-content {
+      background: var(--primary-light);
+      border-radius: 12px;
+      padding: .8rem 1rem;
+      margin-top: .6rem;
+      animation: fadeIn .3s;
+    }
+    @keyframes fadeIn {
+      from { opacity:0; transform: translateY(-8px);}
+      to   { opacity:1; transform: translateY(0);}
+    }
+    .collapse-content a {
+      display: flex; align-items: center;
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-weight: 500;
+      padding: .4rem 0;
+      border-radius: 8px;
+      transition: background .18s;
+    }
+    .collapse-content a:hover {
+      background: #f3f9ff;
+    }
+    .collapse-content a i {
+      margin-right: .45rem; font-size: 1.18rem; color: var(--accent);
+    }
+    /* Main area style */
+    .main {
+      background: var(--card-bg, #fff);
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      padding: 2rem 2.3rem 1.5rem;
+      margin-bottom: 2rem;
+      min-height: 540px;
+      transition: background var(--transition);
+    }
+    .marquee-container {
+      width: 100%;
+      overflow: hidden;
+      background: var(--primary-light);
+      border-radius: 12px;
+      padding: .85rem 1.2rem;
+      margin-bottom: 2rem;
+      margin-top: 1rem;
+      box-shadow: 0 1px 8px 0 #e4eefc;
+    }
+    .marquee {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee 18s linear infinite;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 1.08rem;
+      letter-spacing: .03em;
+    }
+    @keyframes marquee {
+      from { transform: translateX(100%);}
+      to   { transform: translateX(-100%);}
+    }
+    .main-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: .6rem;
+      flex-wrap: wrap;
+    }
+    #symptomInput {
+      width: 350px;
+      max-width: 100%;
+      border-radius: 32px;
+      border: 1.7px solid var(--primary);
+      padding: .85rem 1.35rem;
+      font-size: 1.1rem;
+      transition: box-shadow .2s;
+      background: #fafdff;
+    }
+    #symptomInput:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #74c3f688;
+    }
+    .btn-search {
+      border-radius: 32px;
+      padding: .82rem 2.2rem;
+      font-size: 1.12rem;
+      font-weight: 600;
+      background: linear-gradient(90deg, #2d96ff 0%, #6fd7fd 90%);
+      color: #fff;
+      border: none;
+      box-shadow: 0 2px 10px #4ca1e823;
+      transition: background .19s, transform .18s;
+    }
+    .btn-search:hover, .btn-search:focus {
+      background: linear-gradient(90deg, #1972ca 10%, #53b3e8 100%);
+      transform: translateY(-2px) scale(1.03);
+      color: #fff;
+    }
+    #diagnosisResult {
+      margin-top: .95rem;
+      color: var(--primary-dark);
+      min-height: 2.4rem;
+      font-size: 1.08rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+    .note {
+      font-size: .91rem;
+      color: #aaa;
+      margin-top: -.2rem;
+      margin-bottom: .4rem;
+    }
+    /* Cards & Articles */
+    .articles {
+      margin-top: 1.7rem;
+    }
+    .articles h5 {
+      color: var(--primary-dark);
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+    .card-article {
+      border-radius: 14px;
+      box-shadow: 0 2px 12px 0 #b8d7f833;
+      border: none;
+      overflow: hidden;
+      transition: box-shadow .18s, transform .18s;
+      background: #fafdff;
+      min-height: 325px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .card-article:hover {
+      box-shadow: 0 8px 24px 0 #1d72b944;
+      transform: translateY(-4px) scale(1.03);
+    }
+    .card-article img {
+      width: 100%; height: 155px; object-fit: cover;
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+    }
+    .card-article .card-body {
+      padding: 1rem 1.1rem 1rem;
+    }
+    .card-article .card-title {
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 1.12rem;
+      margin-bottom: .65rem;
+    }
+    .card-article .btn {
+      background: var(--primary);
+      border: none;
+      color: #fff;
+      font-size: .98rem;
+      border-radius: 8px;
+      transition: background .19s;
+    }
+    .card-article .btn:hover {
+      background: var(--primary-dark);
+      color: #fff;
+    }
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 1.1rem 0 0.7rem;
+      background: var(--bg-secondary);
+      color: #7486a7;
+      font-size: .97rem;
+      letter-spacing: .02em;
+      border-top: 1px solid #e4eefc;
+    }
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 .4rem;
+      font-weight: 600;
+    }
+    .footer a:hover { text-decoration: underline;}
+    /* Responsive */
+    @media (max-width:991px) {
+      .main, .sidebar { min-height: unset; }
+      .main { padding: 1.3rem 1rem 1rem; }
+    }
+    @media (max-width:767px) {
+      header { font-size: 1.5rem; padding: 1.5rem 0 1rem;}
+      .main, .sidebar { border-radius: 10px; box-shadow: none;}
+      .main { padding: 1rem .3rem .5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    健康資訊與自我診斷平台
+    <div style="font-size:.97rem;font-weight:400;letter-spacing:.04em;margin-top:.35rem;color:#7ea8db">
+      健康數位服務研究所專題 • Digital Health Self-diagnosis Platform
+    </div>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row gy-4 gx-4 justify-content-center">
+      <!-- 左側 Sidebar -->
+      <aside class="col-12 col-md-4 col-lg-3 col-xl-2">
+        <div class="sidebar">
+          <div class="section-title">功能選單</div>
+          <div class="list-group">
+            <div class="text-center mb-1">
+              <button class="icon-btn" data-bs-toggle="collapse" data-bs-target="#c1" aria-expanded="false" aria-controls="c1"><i class="bi bi-telephone-forward"></i></button>
+              <div class="btn-label">遠距醫療</div>
+              <div class="collapse" id="c1">
+                <div class="collapse-content">
+                  <a href="https://www.hopemedical.com.tw/" target="_blank"><i class="bi bi-hospital"></i> HopeMed</a>
+                  <a href="https://www.ntuh.gov.tw" target="_blank"><i class="bi bi-building"></i> 台大醫院</a>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mb-1">
+              <button class="icon-btn" data-bs-toggle="collapse" data-bs-target="#c2" aria-expanded="false" aria-controls="c2"><i class="bi bi-heart-pulse"></i></button>
+              <div class="btn-label">健康維護</div>
+              <div class="collapse" id="c2">
+                <div class="collapse-content">
+                  <a href="https://www.healthbox.com.tw" target="_blank"><i class="bi bi-heart-pulse"></i> HealthBox</a>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mb-1">
+              <button class="icon-btn" data-bs-toggle="collapse" data-bs-target="#c3" aria-expanded="false" aria-controls="c3"><i class="bi bi-file-earmark-medical"></i></button>
+              <div class="btn-label">健康資訊</div>
+              <div class="collapse" id="c3">
+                <div class="collapse-content">
+                  <a href="https://health.gov.tw/" target="_blank"><i class="bi bi-file-earmark-medical"></i> 衛福部健康99</a>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mb-1">
+              <button class="icon-btn" data-bs-toggle="collapse" data-bs-target="#c4" aria-expanded="false" aria-controls="c4"><i class="bi bi-clipboard-check"></i></button>
+              <div class="btn-label">常見症狀</div>
+              <div class="collapse" id="c4">
+                <div class="collapse-content">
+                  <a href="https://familydoctor.org/symptom-checker/" target="_blank"><i class="bi bi-person-lines-fill"></i> 家庭醫師對照</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 中間 Main -->
+      <main class="col-12 col-md-8 col-lg-6 col-xl-6">
+        <div class="main">
+          <div class="section-title mb-2">症狀輸入與自我初步診斷</div>
+          <div class="main-form">
+            <input type="text" id="symptomInput" placeholder="請輸入症狀（如 喉嚨痛、發燒、胸悶...）" aria-label="請輸入症狀">
+            <button class="btn-search" onclick="diagnose()">搜尋</button>
+          </div>
+          <div class="note">系統僅供初步建議，無法取代專業醫療診斷。</div>
+          <div id="diagnosisResult"></div>
+          <!-- 跑馬燈 -->
+  <div class="marquee-container">
+  <div class="marquee-track">
+    <span>
+      💉 定期接種疫苗，守護健康；🥗 均衡飲食，蔬果攝取多元；💧 夏季多補水防中暑；
+      🏃‍♂️ 每日運動30分鐘；🛏️ 每晚7-8小時高品質睡眠；🦠 注意防疫措施，勤洗手戴口罩；
+      🚑 緊急狀況撥打119。
+      &nbsp;&nbsp;｜&nbsp;&nbsp;
+      💉 定期接種疫苗，守護健康；🥗 均衡飲食，蔬果攝取多元；💧 夏季多補水防中暑；
+      🏃‍♂️ 每日運動30分鐘；🛏️ 每晚7-8小時高品質睡眠；🦠 注意防疫措施，勤洗手戴口罩；
+      🚑 緊急狀況撥打119。
+    </span>
+  </div>
+</div>
+
+<style>
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+  background: #eaf3fc;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 2rem;
+}
+.marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marqueeScroll 15s linear infinite;
+}
+@keyframes marqueeScroll {
+  from { transform: translateX(0%);}
+  to { transform: translateX(-50%);}
+}
+</style>
+          <!-- 文章 -->
+          <section class="articles">
+            <h5>精選健康文章</h5>
+            <div class="row g-4">
+              <div class="col-12 col-sm-6 col-lg-4">
+                <div class="card-article card h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVA5ydF4Zmx6IsxLGRdsvpReqTLFPc1csgGg&s&w=830&q=830" class="card-img-top" alt="良好睡眠">
+                  <div class="card-body">
+                    <div class="card-title">5個提升睡眠的方法</div>
+                    <div class="card-text mb-2" style="font-size:.96rem;line-height:1.6">
+                      睡眠品質直接影響免疫力、精神及健康掌握實用的睡眠訣竅。
+                    </div>
+                    <a href="#" class="btn btn-primary btn-sm">閱讀更多</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <div class="card-article card h-100">
+                <!-- 均衡飲食 card 用這張圖片 -->
+				<img src="https://top1cdn.top1health.com/cdn/am/88340/211157.jpg" alt="均衡飲食" class="card-img-top">
+                  <div class="card-body">
+                    <div class="card-title">均衡飲食的三大關鍵</div>
+                    <div class="card-text mb-2" style="font-size:.96rem;line-height:1.6">
+                      均衡攝取蛋白質、蔬果與全榖雜糧，建立每日健康飲食習慣。
+                    </div>
+                    <a href="#" class="btn btn-primary btn-sm">閱讀更多</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <div class="card-article card h-100">
+                  <img src="https://image.cache.storm.mg/styles/smg-800xauto-er/s3/media/image/2022/05/27/20220527-031924_U25228_M766365_ef34.png?itok=JFNaizr8&w=400&q=80" class="card-img-top" alt="運動指南">
+                  <div class="card-body">
+                    <div class="card-title">每日10分鐘居家運動</div>
+                    <div class="card-text mb-2" style="font-size:.96rem;line-height:1.6">
+                      忙碌生活中也能輕鬆實踐運動，增強體力與免疫力。
+                    </div>
+                    <a href="#" class="btn btn-primary btn-sm">閱讀更多</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- 右側 Sidebar -->
+      <aside class="col-12 col-lg-3 col-xl-2 d-none d-lg-block">
+        <div class="sidebar">
+          <div class="section-title">健康資訊</div>
+          <div class="list-group">
+            <div class="text-center mb-1">
+              <button class="icon-btn" data-bs-toggle="collapse" data-bs-target="#c5" aria-expanded="false" aria-controls="c5"><i class="bi bi-heart-fill"></i></button>
+              <div class="btn-label">飲食調理</div>
+              <div class="collapse" id="c5">
+                <div class="collapse-content">
+                  <a href="https://nutr.mohw.gov.tw" target="_blank"><i class="bi bi-book"></i> 國健署指引</a>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mb-1">
+              <button class="icon-btn" data-bs-toggle="collapse" data-bs-target="#c6" aria-expanded="false" aria-controls="c6"><i class="bi bi-bar-chart-line"></i></button>
+              <div class="btn-label">營養資訊</div>
+              <div class="collapse" id="c6">
+                <div class="collapse-content">
+                  <a href="https://healthline.com/nutrition" target="_blank"><i class="bi bi-bar-chart-line"></i> Healthline</a>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mb-1">
+              <button class="icon-btn" data-bs-toggle="collapse" data-bs-target="#c7" aria-expanded="false" aria-controls="c7"><i class="bi bi-shield-lock"></i></button>
+              <div class="btn-label">防疫資訊</div>
+              <div class="collapse" id="c7">
+                <div class="collapse-content">
+                  <a href="https://www.cdc.gov.tw/" target="_blank"><i class="bi bi-shield-lock"></i> 台灣 CDC</a>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mb-1">
+              <button class="icon-btn" data-bs-toggle="collapse" data-bs-target="#c8" aria-expanded="false" aria-controls="c8"><i class="bi bi-journal-medical"></i></button>
+              <div class="btn-label">健保系統</div>
+              <div class="collapse" id="c8">
+                <div class="collapse-content">
+                  <a href="https://www.nhi.gov.tw/" target="_blank"><i class="bi bi-journal-medical"></i> 健保署</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 健康資訊與自我診斷平台｜
+    <a href="#">隱私權政策</a>｜
+    <a href="#">聯絡我們</a>｜
+    <a href="#">研究計畫說明</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function diagnose() {
+      const s = document.getElementById('symptomInput').value.trim().toLowerCase();
+      const r = document.getElementById('diagnosisResult');
+      const map = {
+        "頭痛": "可能是壓力、睡眠不足或偏頭痛，建議多休息。若持續嚴重或伴隨嘔吐、視力異常，請立即就醫。",
+        "發燒": "可能為感染徵兆，建議多補充水分並觀察體溫。高燒不退或合併意識不清，請盡速就醫。",
+        "咳嗽": "可能為感冒、過敏或呼吸道感染。請觀察有無痰及持續時間，若咳嗽超過2週或有血痰，請就醫。",
+        "喉嚨痛": "多為病毒感染，建議多喝溫水與休息，避免刺激性飲食。",
+        "腹瀉": "請補充水分與電解質，若持續超過2天或出現血便、嚴重腹痛，請盡速就醫。",
+        "胸悶": "如伴隨呼吸困難或胸痛、冒冷汗，請立即就醫，避免延誤治療。",
+        "流鼻水": "可能為感冒或過敏反應，建議多休息並觀察症狀變化。",
+        "暈眩": "可能因貧血、血壓異常或內耳不平衡，建議暫時休息，如反覆或伴隨意識喪失請就醫。",
+        "關節痛": "可能為勞損或炎症，若合併腫脹、發熱，建議就醫評估。"
+      };
+      if (!s) {
+        r.innerHTML = '<span style="color:#d63333">⚠️ 請輸入症狀！</span>';
+      } else if (map[s]) {
+        r.innerHTML = '<span style="color:#219150">' + map[s] + '</span>';
+      } else {
+        r.innerHTML = '<span style="color:#b9931c">⚠️ 未能判別「'+s+'」的症狀，建議諮詢專業醫師。</span>';
+      }
+    }
+  </script>
+</body>
+</html>
