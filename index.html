@@ -4,10 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>健康資訊與自我診斷平台 | 健康數位服務研究</title>
-  <!-- Bootstrap 5 + Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
   <style>
+    /* 所有 CSS 維持原樣，只加入更完整的響應式調整 */
+
+    @media (max-width: 576px) {
+      header {
+        font-size: 1.3rem;
+        padding: 1.2rem 0 .8rem;
+      }
+      .main-form {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn-search {
+        width: 100%;
+      }
+      .card-article .card-body {
+        padding: .8rem .9rem .8rem;
+      }
+      .footer {
+        font-size: .85rem;
+        padding: .8rem 0 .5rem;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .container-fluid {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    }
     :root {
       --primary:       #1876d1;
       --primary-light: #eaf3fc;
