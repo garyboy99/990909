@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>健康資訊與自我診斷平台 | 健康數位服務研究</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
@@ -335,7 +335,7 @@
               <div class="btn-label">遠距醫療</div>
               <div class="collapse" id="c1">
                 <div class="collapse-content">
-                  <a href="https://www.hopemedical.com.tw/" target="_blank"><i class="bi bi-hospital"></i> HopeMed</a>
+                  <a href="https://telemedicine.mohw.gov.tw/#/Login" target="_blank"><i class="bi bi-hospital"></i> 遠距醫療</a>
                   <a href="https://www.ntuh.gov.tw" target="_blank"><i class="bi bi-building"></i> 台大醫院</a>
                 </div>
               </div>
@@ -345,7 +345,7 @@
               <div class="btn-label">健康維護</div>
               <div class="collapse" id="c2">
                 <div class="collapse-content">
-                  <a href="https://www.healthbox.com.tw" target="_blank"><i class="bi bi-heart-pulse"></i> HealthBox</a>
+                  <a href="https://ltu1730.video.ltu.edu.tw/p/doc10" target="_blank"><i class="bi bi-heart-pulse"></i> HealthBox</a>
                 </div>
               </div>
             </div>
@@ -354,7 +354,7 @@
               <div class="btn-label">健康資訊</div>
               <div class="collapse" id="c3">
                 <div class="collapse-content">
-                  <a href="https://health.gov.tw/" target="_blank"><i class="bi bi-file-earmark-medical"></i> 衛福部健康99</a>
+                  <a href="https://health99.hpa.gov.tw/" target="_blank"><i class="bi bi-file-earmark-medical"></i> 衛福部健康九九</a>
                 </div>
               </div>
             </div>
@@ -362,13 +362,27 @@
               <button class="icon-btn" data-bs-toggle="collapse" data-bs-target="#c4" aria-expanded="false" aria-controls="c4"><i class="bi bi-clipboard-check"></i></button>
               <div class="btn-label">常見症狀</div>
               <div class="collapse" id="c4">
+			  
                 <div class="collapse-content">
                   <a href="https://familydoctor.org/symptom-checker/" target="_blank"><i class="bi bi-person-lines-fill"></i> 家庭醫師對照</a>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+		  <!-- 左側 sidebar collapse menu -->
+    </div>
+    <!-- ⬇⬇⬇ 這裡插入個人檔案表單區塊 ⬇⬇⬇ -->
+    <div class="sidebar mb-3 p-3" style="background:#eaf3fc;">
+      <h5><i class="bi bi-person-circle"></i> 個人檔案</h5>
+      <input type="text" class="form-control mb-2" placeholder="姓名">
+      <input type="number" class="form-control mb-2" placeholder="年齡">
+      <input type="text" class="form-control mb-2" placeholder="過敏史 / 慢性病">
+      <button class="btn btn-primary w-100">儲存</button>
+    </div>
+<!-- ⬆⬆⬆ 這裡插入 ⬆⬆⬆ -->
+
+</aside>
+
       </aside>
 
       <!-- 中間 Main -->
@@ -462,7 +476,7 @@
       </main>
 
       <!-- 右側 Sidebar -->
-	<aside class="col-12 col-md-6 col-lg-3 col-xl-2">
+     <aside class="col-12 col-md-6 col-lg-3 col-xl-2">
         <div class="sidebar">
           <div class="section-title">健康資訊</div>
           <div class="list-group">
@@ -471,7 +485,7 @@
               <div class="btn-label">飲食調理</div>
               <div class="collapse" id="c5">
                 <div class="collapse-content">
-                  <a href="https://nutr.mohw.gov.tw" target="_blank"><i class="bi bi-book"></i> 國健署指引</a>
+                  <a href="https://www.hpa.gov.tw/Pages/Detail.aspx?nodeid=543&pid=9606" target="_blank"><i class="bi bi-book"></i> 國健署指引</a>
                 </div>
               </div>
             </div>
@@ -480,7 +494,7 @@
               <div class="btn-label">營養資訊</div>
               <div class="collapse" id="c6">
                 <div class="collapse-content">
-                  <a href="https://healthline.com/nutrition" target="_blank"><i class="bi bi-bar-chart-line"></i> Healthline</a>
+                  <a href="https://ahealth.tw/" target="_blank"><i class="bi bi-bar-chart-line"></i> Healthline</a>
                 </div>
               </div>
             </div>
@@ -498,12 +512,30 @@
               <div class="btn-label">健保系統</div>
               <div class="collapse" id="c8">
                 <div class="collapse-content">
-                  <a href="https://www.nhi.gov.tw/" target="_blank"><i class="bi bi-journal-medical"></i> 健保署</a>
+                  <a href="https://www.nhi.gov.tw/ch/mp-1.html" target="_blank"><i class="bi bi-journal-medical"></i> 健保署</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+		<div class="text-center mb-1">
+  <button class="icon-btn" data-bs-toggle="collapse" data-bs-target="#chatCollapse">
+    <i class="bi bi-chat-dots"></i>
+  </button>
+  <div class="btn-label">即時客服</div>
+  <div class="collapse" id="chatCollapse">
+    <div class="collapse-content">
+      <p style="font-size:.9rem">客服時間：09:00~18:00</p>
+      <a href="mailto:support@example.com" class="btn btn-outline-primary btn-sm w-100 mb-1">
+        <i class="bi bi-envelope"></i> Email客服
+      </a>
+      <a href="https://line.me/R/ti/p/@yourlineid" target="_blank" class="btn btn-success btn-sm w-100">
+        <i class="bi bi-line"></i> LINE 即時對話
+      </a>
+    </div>
+  </div>
+</div>
+
       </aside>
 
     </div>
@@ -522,15 +554,51 @@
       const s = document.getElementById('symptomInput').value.trim().toLowerCase();
       const r = document.getElementById('diagnosisResult');
       const map = {
-        "頭痛": "可能是壓力、睡眠不足或偏頭痛，建議多休息。若持續嚴重或伴隨嘔吐、視力異常，請立即就醫。",
-        "發燒": "可能為感染徵兆，建議多補充水分並觀察體溫。高燒不退或合併意識不清，請盡速就醫。",
-        "咳嗽": "可能為感冒、過敏或呼吸道感染。請觀察有無痰及持續時間，若咳嗽超過2週或有血痰，請就醫。",
-        "喉嚨痛": "多為病毒感染，建議多喝溫水與休息，避免刺激性飲食。",
-        "腹瀉": "請補充水分與電解質，若持續超過2天或出現血便、嚴重腹痛，請盡速就醫。",
-        "胸悶": "如伴隨呼吸困難或胸痛、冒冷汗，請立即就醫，避免延誤治療。",
-        "流鼻水": "可能為感冒或過敏反應，建議多休息並觀察症狀變化。",
-        "暈眩": "可能因貧血、血壓異常或內耳不平衡，建議暫時休息，如反覆或伴隨意識喪失請就醫。",
-        "關節痛": "可能為勞損或炎症，若合併腫脹、發熱，建議就醫評估。"
+       "頭痛": "可能是壓力、睡眠不足或偏頭痛，建議多休息。若持續嚴重或伴隨嘔吐、視力異常，請立即就醫。",
+    "發燒": "可能為感染徵兆，建議多補充水分並觀察體溫。高燒不退或合併意識不清，請盡速就醫。",
+    "咳嗽": "可能為感冒、過敏或呼吸道感染。請觀察有無痰及持續時間，若咳嗽超過2週或有血痰，請就醫。",
+    "喉嚨痛": "多為病毒感染，建議多喝溫水與休息，避免刺激性飲食。",
+    "腹瀉": "請補充水分與電解質，若持續超過2天或出現血便、嚴重腹痛，請盡速就醫。",
+    "胸悶": "如伴隨呼吸困難或胸痛、冒冷汗，請立即就醫，避免延誤治療。",
+    "流鼻水": "可能為感冒或過敏反應，建議多休息並觀察症狀變化。",
+    "暈眩": "可能因貧血、血壓異常或內耳不平衡，建議暫時休息，如反覆或伴隨意識喪失請就醫。",
+    "關節痛": "可能為勞損或炎症，若合併腫脹、發熱，建議就醫評估。",
+    "噁心嘔吐": "可能因腸胃不適、病毒感染或暈車，建議多休息及少量多餐。若持續不止或出現脫水現象，請就醫。",
+    "腹痛": "可能為腸胃炎、消化不良或其他腹腔疾病。若劇烈腹痛或持續不緩解，建議就醫。",
+    "呼吸急促": "可能與過敏、氣喘或心肺功能異常有關。如有嚴重不適或持續加劇，請立即就醫。",
+    "皮膚癢疹": "多為過敏或接觸性皮膚炎。避免抓癢並使用保濕產品。若全身性或伴發燒，請就醫。",
+    "手腳麻木": "可能為神經壓迫、循環不良等原因。若症狀持續或影響活動力，建議就醫檢查。",
+    "背痛": "多因姿勢不良、肌肉拉傷或椎間盤問題。建議適度休息及熱敷，若伴隨下肢麻木、無力請就醫。",
+    "心悸": "可能為壓力、咖啡因攝取過多或心律不整。若持續或伴胸痛、暈眩，建議就醫。",
+    "眼睛紅癢": "可能因過敏、結膜炎所致，建議避免揉眼，必要時可用人工淚液。若有分泌物或疼痛，請就醫。",
+    "耳鳴": "可能與壓力、噪音暴露或耳朵疾病有關。若持續不退或影響聽力，請就醫。",
+    "失眠": "可能因壓力、環境變化或生活習慣。建議規律作息、減少睡前刺激。如影響日常生活，請尋求醫師協助。",
+    "呼吸困難": "可能因氣喘、肺部感染或心臟疾病。如無法平躺、出現紫紺、劇烈喘不過氣，請立即就醫。",
+    "喘鳴": "多見於過敏、氣喘或呼吸道阻塞，若呼吸聲音變大、合併呼吸困難，請就醫。",
+    "尿急尿痛": "可能為泌尿道感染。多喝水，若有血尿或發燒，請就醫。",
+    "血尿": "可能為尿路感染、結石或腎臟問題，請立即就醫評估。",
+    "胸痛": "可能因心臟、肺部或肌肉骨骼問題。若壓迫性、持續或放射至左臂、頸部，請立即就醫。",
+    "水腫": "常見於心臟、腎臟或肝臟功能異常。若急性發生或持續惡化，建議就醫。",
+    "視力模糊": "可能為眼壓異常、視網膜病變或血糖波動。若突發性或伴隨劇烈頭痛、噁心，請就醫。",
+    "吞嚥困難": "可能因咽喉腫脹、食道異物或神經性疾病。若吞嚥困難持續或加劇，請就醫。",
+    "食慾不振": "可能為消化道或代謝性疾病、心理壓力。若體重短期下降明顯，建議就醫。",
+    "盜汗": "可能為感染、荷爾蒙異常或慢性疾病。若持續且無法解釋，請就醫。",
+    "口乾": "可能因糖尿病、藥物副作用、脫水。建議多補充水分，若持續請就醫。",
+    "打嗝": "多為胃腸道氣體，通常可自行緩解。如持續超過48小時，請就醫。",
+    "便秘": "多因纖維攝取不足、活動量低或藥物副作用。多喝水、多吃蔬果，嚴重時請就醫。",
+    "貧血": "可能因缺鐵、慢性疾病或失血。若出現明顯疲勞、心悸、臉色蒼白，建議檢查。",
+    "流鼻血": "多因鼻腔乾燥、外傷或血壓升高。壓迫止血並休息，若反覆發生或大量出血請就醫。",
+    "肌肉痠痛": "常因運動、過度使用或姿勢不良。若伴發燒、紅腫熱痛，請就醫。",
+    "出汗過多": "可能與甲狀腺功能異常、感染或壓力有關。如無法解釋或影響日常，建議就醫。",
+    "易瘀青": "可能為血小板異常、肝功能異常或凝血異常。若常常莫名出現瘀青，請就醫。",
+    "聲音沙啞": "多因聲帶過度使用、感染或刺激。多休息、少講話，超過兩週未改善請就醫。",
+    "黑棘皮": "需要根據病因進行治療。 如果是由胰島素阻抗或肥胖引起的，減重是最好的方法。 如果是由藥物引起的，停藥後症狀即可改善。",
+    "掉髮": "可能與壓力、荷爾蒙變化、營養不良有關。若短期大量掉髮，請就醫。",
+    "全身痠痛": "多因病毒感染（如流感）、過勞、慢性疾病。若持續且伴發燒，請就醫。",
+    "記憶力減退": "可能為壓力、睡眠障礙或神經退化。若逐漸加重或影響日常生活，請就醫。",
+    "走路不穩": "可能為神經系統、內耳、肌肉骨骼問題。若突然發生或合併其他神經症狀，請就醫。",
+    "肚子脹氣": "常見於飲食、消化不良、腸胃功能異常。可少量多餐，持續不適請就醫。",
+    "月經異常": "可能與壓力、荷爾蒙不平衡、婦科疾病有關。如月經長期不規則、過多或過少，請就醫。"
       };
       if (!s) {
         r.innerHTML = '<span style="color:#d63333">⚠️ 請輸入症狀！</span>';
